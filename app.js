@@ -25,8 +25,8 @@ app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`;
 
 // bind user to view - locals
 app.use('/', (req, res, next) => {
-  res.locals.user = req.session.user
-  next()
+    res.locals.user = req.session.user
+    next()
 })
 
 // 👇 Start handling routes here
@@ -42,4 +42,10 @@ app.use('/', dashboard);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
 
+hbs.registerHelper('ifEqual', function (val1, val2, options) {
+    if (val1 === val2) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+});
 module.exports = app;

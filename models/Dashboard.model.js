@@ -7,7 +7,10 @@ const dashboardSchema = new Schema(
         description: String
         ,
         type: {
+            type: String,
             enum: ['Crypto', 'NFT'],
+            default: 'Crypto'
+
         },
         image_url: String,
     },
@@ -16,4 +19,4 @@ const dashboardSchema = new Schema(
     }
 );
 
-module.exports = model("User", dashboardSchema);
+module.exports = model("Dashboard", dashboardSchema);

@@ -13,7 +13,6 @@ body {
 a {
     color: #7373b6;
     text-decoration: none;
-    font-size: 1.5em;
 }
 
 form {
@@ -33,6 +32,7 @@ form label {
     width: 100%;
 }
 
+form select,
 form input,
 form button {
     box-sizing: border-box;
@@ -43,7 +43,7 @@ form button {
     margin-bottom: 1rem;
 }
 
-input {
+input, select {
     color: #7373b6;
     height: 2.5rem;
     border: none;
@@ -144,4 +144,65 @@ ul li {
     background: none;
     border: none;
     color: #7373b6;
+}
+
+#addDashboard i {
+    padding-left: 20px;
+
+}
+
+#dashboard-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding-top: 3rem;
+}
+
+.dashboard-container {
+    background-color: white;
+    border-radius: 1rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+
+    border-left: 0.25rem solid #7373b6;
+    border-bottom: 0.125rem solid #7373b6;
+}
+
+#dashboard-action {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    padding: 0 1.5rem 0.5rem 0rem;
+}
+
+#dashboard-action i {
+    padding-right: 1rem;
+}
+
+#gallery {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+#gallery i {
+    padding-left: 0.5rem;
+}
+#gallery-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
