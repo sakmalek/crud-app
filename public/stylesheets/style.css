@@ -2,7 +2,7 @@
 
 body {
     height: 100vh;
-    padding: 2rem;
+    padding: 0.25rem 2.5rem 0rem 2.5rem;
     margin: 0.1rem;
     font-size: 1.25rem;
     font-family: 'Sora', sans-serif;
@@ -20,7 +20,7 @@ form {
     margin: 30px auto;
     max-width: 23.75rem;
     width: 80%;
-    padding: 3.25rem;
+    padding: 2.25rem;
     border-radius: 4rem;
     background-color: #ffffff9e;
     border: 2px solid #7373b6;
@@ -41,14 +41,14 @@ form button {
     padding-left: 0.5rem;
     width: 100%;
     margin-bottom: 1rem;
-
 }
 
 input {
+    color: #7373b6;
     height: 2.5rem;
     border: none;
     border-radius: 1.5rem;
-    border-bottom: solid 0.25rem #7373b6;
+    border-bottom: solid 0.1rem #7373b6;
 }
 
 input::placeholder {
@@ -73,6 +73,7 @@ form button:hover {
     background: rgba(6, 44, 190, 0.66);
     color: #000000;
     transition: 0.3s ease background;
+    border: 0.25rem solid rgba(255, 255, 255, 0.5);
 }
 
 .error {
@@ -80,7 +81,7 @@ form button:hover {
     box-sizing: border-box;
     color: #ff0000ad;
     margin: 20px auto;
-    padding: 20px;
+    padding: 1rem;
     width: 100%;
     border-radius: 10px;
     border: 2px solid #ffffff42;
@@ -90,7 +91,7 @@ form button:hover {
 nav ul {
     border-bottom: 2px solid #7373b6;
     height: 30px;
-    padding: 1em 0;
+    padding-bottom: 0.5rem;
     list-style-type: none;
 }
 

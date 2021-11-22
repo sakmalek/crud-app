@@ -12,7 +12,31 @@ const isLoggedOut = (req, res, next) => {
     next();
 };
 
+const canReadyOnly = (req, res, next) => {
+    if (req.session.user.role === '001') {
+        return res.redirect("/");
+    }
+    next();
+};
+
+const canReadAndWrite = (req, res, next) => {
+    if (req.session.user.role === '011') {
+        return res.redirect("/");
+    }
+    next();
+};
+
+const isLoggedUserAdmin = (req, res, next) => {
+    if (req.session.user.role === '111') {
+        return res.redirect("/");
+    }
+    next();
+};
+
 module.exports = {
     isLoggedIn,
-    isLoggedOut
+    isLoggedOut,
+    isLoggedUserAdmin,
+    canReadyOnly,
+    canReadAndWrite,
 };

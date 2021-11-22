@@ -8,14 +8,10 @@ const bcryptjs = require("bcryptjs");
 const saltRounds = 10;
 
 // Require the User model in order to interact with the database
-const User = require("../models/User.model");
+const User = require("../../models/User.model");
 
-// require (import) middleware functions
-const {isLoggedIn, isLoggedOut} = require("../middleware/route-guard.js");
+const {isLoggedIn, isLoggedOut} = require("../../middleware/route-guard.js");
 
-////////////////////////////////////////////////////////////////////////
-///////////////////////////// SIGNUP //////////////////////////////////
-////////////////////////////////////////////////////////////////////////
 
 // .get() route ==> to display the signup form to users
 router.get("/signup", isLoggedOut, (req, res) => res.render("auth/signup"));
@@ -48,15 +44,11 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
             return User.create({
                 username,
                 email,
-                // passwordHash => this is the key from the User model
-                //     ^
-                //     |            |--> this is placeholder (how we named returning value from the previous method (.hash()))
                 passwordHash: hashedPassword
             });
         })
         .then((userFromDB) => {
-            // console.log("Newly created user is: ", userFromDB);
-            res.redirect("/user-profile");
+            res.redirect("/user");
         })
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {
@@ -68,23 +60,17 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
             } else {
                 next(error);
             }
-        }); // close .catch()
+        });
 });
 
-////////////////////////////////////////////////////////////////////////
-///////////////////////////// LOGIN ////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-
-// .get() route ==> to display the login form to users
 router.get("/login", isLoggedOut, (req, res) => res.render("auth/login"));
 
-// .post() login route ==> to process form data
 router.post("/login", isLoggedOut, (req, res, next) => {
     const {email, password} = req.body;
 
     if (email === "" || password === "") {
         res.render("auth/login", {
-            errorMessage: "Please enter both, email and password to login."
+            errorMessage: "Email and password are required"
         });
         return;
     }
@@ -92,11 +78,11 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     User.findOne({email})
         .then((user) => {
             if (!user) {
-                res.render("auth/login", {errorMessage: "Email is not registered. Try with other email."});
+                res.render("auth/login", {errorMessage: "Email or password is wrong"});
                 return;
             } else if (bcryptjs.compareSync(password, user.passwordHash)) {
                 req.session.user = user;
-                res.redirect("/user-profile");
+                res.redirect("/user");
             } else {
                 res.render("auth/login", {errorMessage: "Email or password is wrong"});
             }
@@ -104,17 +90,14 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         .catch((error) => next(error));
 });
 
-////////////////////////////////////////////////////////////////////////
-///////////////////////////// LOGOUT ////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
 
 router.post("/logout", isLoggedIn, (req, res) => {
     req.session.destroy();
     res.redirect("/");
 });
 
-router.get("/user-profile", isLoggedIn, (req, res) => {
-    res.render("users/user-profile");
+router.get("/user", isLoggedIn, (req, res) => {
+    res.render("users/user");
 });
 
 module.exports = router;
