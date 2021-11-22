@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/a1049cf481.js" crossorigin="anonymous"></script>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+</head>
+
+<body>
+<nav>
+    <ul>
+        <li id="to-right">
+            {{#if user}}
+                <a href="/user-profile">Dashboard</a> <span id="separator"> | </span>
+                <form id="logout-form" action="/logout" method="POST">
+                    <button><i class="fas fa-sign-out-alt"></i></button>
+                </form>
+            {{else}}
+                <a href="/signup">Signup</a> <span id="separator"> | </span>
+                <a href="/login">Login</a> <span id="separator">  </span>
+            {{/if}}
+        </li>
+    </ul>
+</nav>
+
+{{{body}}}
+
+<script src="/js/script.js"></script>
+</body>
+
+</html>
