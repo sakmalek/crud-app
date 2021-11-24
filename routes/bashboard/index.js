@@ -51,6 +51,7 @@ router.post("/dashboard", isLoggedIn, (req, res, next) => {
 
 router.post("/dashboard/:address/:token/:dashboardId", isLoggedIn, (req, res, next) => {
 res.send(req.params)
+
 });
 router.post("/dashboard/:dashboardId", isLoggedIn, (req, res, next) => {
     const {name, description, type, image_url} = req.body;
