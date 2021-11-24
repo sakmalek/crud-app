@@ -10,7 +10,12 @@ Document
 /**
 Use a better box model (opinionated).
 */
-
+    .top-100 {
+        top: 100%
+    }
+    .max-h-select {
+        max-height: 300px;
+    }
 *,
 ::before,
 ::after {
