@@ -21,7 +21,7 @@ mongoose
 //https://api.opensea.io/api/v1/assets?order_by=sale_date&order_direction=desc&offset=0&limit=50
 axios.get('https://api.opensea.io/api/v1/assets?order_by=sale_date&order_direction=desc&offset=0&limit=50')
     .then(nfts => {
-        NFTAssets.insertMany(nfts.data.assets)
+        NFTAssets.insertMany(nfts.data.assets, {ordered: false})
             .then((nfts) => {
                 console.log(nfts.length)
                 mongoose.connection.close();

@@ -30,18 +30,14 @@ router.get("/dashboard/:dashboardId/delete", isLoggedIn, (req, res, next) => {
         .catch(err => next(err));
 });
 router.get("/dashboard/:dashboardId", isLoggedIn, (req, res, next) => {
-    // Dashboard.findById(req.params.dashboardId)
-    //     .then(dashboard => {
-    //         res.render("dashboard/show", {dashboard})
-    //     })
-    //     .catch(err => next(err));
-
+    const dashboardId = req.params.dashboardId;
     NFTAssets.find()
         .then(nfts => {
-            res.render("dashboard/show", {nfts})
+            res.render("dashboard/show", {nfts, dashboardId})
         })
         .catch(err => next(err))
 });
+
 router.post("/dashboard", isLoggedIn, (req, res, next) => {
     const {name, description, type, image_url} = req.body;
 
@@ -52,6 +48,10 @@ router.post("/dashboard", isLoggedIn, (req, res, next) => {
         .catch(err => next(err))
 });
 
+
+router.post("/dashboard/:address/:token/:dashboardId", isLoggedIn, (req, res, next) => {
+res.send(req.params)
+});
 router.post("/dashboard/:dashboardId", isLoggedIn, (req, res, next) => {
     const {name, description, type, image_url} = req.body;
     const id = req.params.dashboardId

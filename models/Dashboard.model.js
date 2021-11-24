@@ -13,6 +13,10 @@ const dashboardSchema = new Schema(
 
         },
         image_url: String,
+        nfts: [{
+            type: Schema.Types.ObjectId,
+            ref: 'NFTAssets',
+        }]
     },
     {
         timestamps: true
