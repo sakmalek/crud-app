@@ -39,6 +39,11 @@ app.use('/', authRoutes);
 const dashboard = require('./routes/bashboard/index');
 app.use('/', dashboard);
 
+const cryptocurrency = require('./routes/cryptocurrency/index');
+app.use('/', cryptocurrency);
+
+const nft = require('./routes/NFT/index');
+app.use('/', nft);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
 

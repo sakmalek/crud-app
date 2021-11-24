@@ -1,7 +1,7 @@
 <h3>edit {{dashboard.name}}</h3>
 
 <div id="auth">
-    <form action="/dashboard/{{_id}}/edit" method="POST">
+    <form action="/dashboard/{{dashboard._id}}" method="POST">
 
         <label for="name">Name</label>
         <input type="text" name="name" value="{{dashboard.name}}"/>
@@ -10,7 +10,7 @@
         <input type="text" name="description" value="{{dashboard.name}}"/>
 
         <label for="image_url">Image</label>
-        <input type="text" name="image_url" value="{{dashboard.name}}"/>
+        <input type="text" name="image_url" value="{{dashboard.image_url}}"/>
 
         <label for="type">Type</label>
         <select name="type">

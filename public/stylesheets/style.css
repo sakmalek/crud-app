@@ -6,7 +6,7 @@ body {
     margin: 0.1rem;
     font-size: 1.25rem;
     font-family: 'Sora', sans-serif;
-    background-color: rgba(113, 180, 255, 0.56);
+    background-color: rgba(10, 116, 232, 0.56);
     color: #7373b6;
 }
 
@@ -200,9 +200,41 @@ ul li {
 #gallery i {
     padding-left: 0.5rem;
 }
+
 #gallery-options {
     display: flex;
     align-items: center;
     justify-content: center;
     align-content: center;
+}
+
+.NFT-container {
+    background-color: white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 2rem;
+    width: 2rem;
+    border-left: 0.25rem solid #7373b6;
+    border-bottom: 0.125rem solid #7373b6;
+}
+
+#suggestions-wrapper {
+    border-right: white solid 2px;
+    border-radius: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+    padding-top: 4rem;
+    overflow-y: scroll;
 }

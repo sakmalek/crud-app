@@ -1,3 +1,25 @@
 <h3>Welcome to <strong>{{dashboard.name}}</strong></h3>
 
+<form action="/nft" method="POST">
+    <input list="nfts" name="searchWorld" id="browser">
+</form>
 
+
+<datalist id="nfts">
+    {{#each nfts}}
+    <option style="background-image: url({{image_url}})" value={{name}}>
+    {{/each}}
+</datalist>
+
+
+<!--<div id="dashboard-wrapper">-->
+<!--    {{#each nfts}}-->
+<!--        <a href="/nft/{{_id}}">-->
+<!--            <div class="dashboard-container"-->
+<!--                 style="background-image: url({{image_url}}); background-size: cover; background-repeat: no-repeat; height: 5rem; width:5rem; border-radius:100%">-->
+<!--                &lt;!&ndash;                <h2>{{name}}</h2>&ndash;&gt;-->
+<!--                &lt;!&ndash;            <p>{{description}}</p>&ndash;&gt;-->
+<!--            </div>-->
+<!--        </a>-->
+<!--    {{/each}}-->
+<!--</div>-->
