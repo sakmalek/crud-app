@@ -10,9 +10,12 @@ const dashboardSchema = new Schema(
             type: String,
             enum: ['Crypto', 'NFT'],
             default: 'Crypto'
-
         },
         image_url: String,
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
         nfts: [{
             type: Schema.Types.ObjectId,
             ref: 'NFTAssets',

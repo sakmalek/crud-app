@@ -12,6 +12,19 @@ const nftAssetsSchema = new Schema(
                 address: String,
                 name: String,
             },
+            last_sale: {
+                total_price: String,
+                payment_token: {
+                    image_url: String,
+                    name: String,
+                    decimals: String,
+                    eth_price: String,
+                    usd_price: String,
+                },
+            },
+
+            created_date: String,
+            quantity: String,
             image_url: String,
         },
         {

@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const {isLoggedIn} = require("../../middleware/route-guard.js");
+const {isLoggedIn, isOwner} = require("../../middleware/route-guard.js");
 const Dashboard = require("../../models/Dashboard.model")
 const NFTAssets = require("../../models/NFTAssets.model");
 
 router.get("/dashboards", isLoggedIn, (req, res, next) => {
-    Dashboard.find()
+    Dashboard.find({owner: req.session.user})
         .then(dashboards => {
             res.render("dashboard/index", {dashboards})
         })
@@ -29,7 +29,7 @@ router.get("/dashboard/:dashboardId/delete", isLoggedIn, (req, res, next) => {
         })
         .catch(err => next(err));
 });
-router.get("/dashboard/:dashboardId", isLoggedIn, (req, res, next) => {
+router.get("/dashboard/:dashboardId", isOwner, isLoggedIn, (req, res, next) => {
     const dashboardId = req.params.dashboardId;
     NFTAssets.find()
         .then(nfts => {
@@ -46,8 +46,8 @@ router.get("/dashboard/:dashboardId", isLoggedIn, (req, res, next) => {
 
 router.post("/dashboard", isLoggedIn, (req, res, next) => {
     const {name, description, type, image_url} = req.body;
-
-    Dashboard.create({name, description, type, image_url})
+    const owner = req.session.user;
+    Dashboard.create({name, description, type, image_url, owner})
         .then(() => {
             res.redirect("/dashboards")
         })
@@ -64,6 +64,16 @@ router.post("/dashboard/:address/:tokenId/:dashboardId", isLoggedIn, (req, res, 
                 .findByIdAndUpdate(req.params.dashboardId, {$push: {nfts: nft}})
                 .then(() => res.redirect(`/dashboard/${req.params.dashboardId}`))
                 .catch(err => next(err))
+        })
+        .catch(err => next(err))
+});
+router.post("/dashboard/:nftId/:dashboardId/nft/delete", isLoggedIn, (req, res, next) => {
+
+    Dashboard
+        .findByIdAndUpdate(req.params.dashboardId, {$pull: {nfts: req.params.nftId}})
+        .then((das) => {
+            console.log(das)
+            res.redirect(`/dashboard/${req.params.dashboardId}`)
         })
         .catch(err => next(err))
 });

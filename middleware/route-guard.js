@@ -1,3 +1,5 @@
+const Dashboard = require("../models/Dashboard.model")
+
 const isLoggedIn = (req, res, next) => {
     if (!req.session.user) {
         return res.redirect("/login");
@@ -12,31 +14,21 @@ const isLoggedOut = (req, res, next) => {
     next();
 };
 
-const canReadyOnly = (req, res, next) => {
-    if (req.session.user.role === '001') {
-        return res.redirect("/");
-    }
-    next();
+const isOwner = (req, res, next) => {
+    console.log(req.params.dashboardId)
+    Dashboard
+        .findById(req.params.dashboardId)
+        .then(dashboard => {
+            console.log(req.session.user._id, dashboard.owner.toString())
+            if (req.session.user._id !== dashboard.owner.toString()) {
+                return res.redirect("/");
+            }
+            next();
+        })
+        .catch(err => console.log(err))
 };
-
-const canReadAndWrite = (req, res, next) => {
-    if (req.session.user.role === '011') {
-        return res.redirect("/");
-    }
-    next();
-};
-
-const isLoggedUserAdmin = (req, res, next) => {
-    if (req.session.user.role === '111') {
-        return res.redirect("/");
-    }
-    next();
-};
-
 module.exports = {
     isLoggedIn,
     isLoggedOut,
-    isLoggedUserAdmin,
-    canReadyOnly,
-    canReadAndWrite,
+    isOwner,
 };
