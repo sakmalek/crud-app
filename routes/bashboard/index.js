@@ -33,7 +33,13 @@ router.get("/dashboard/:dashboardId", isLoggedIn, (req, res, next) => {
     const dashboardId = req.params.dashboardId;
     NFTAssets.find()
         .then(nfts => {
-            res.render("dashboard/show", {nfts, dashboardId})
+            Dashboard
+                .findById(req.params.dashboardId)
+                .populate('nfts')
+                .then(dashboard => {
+                    res.render("dashboard/show", {nfts, dashboard, dashboardId})
+                })
+                .catch(err => next(err))
         })
         .catch(err => next(err))
 });
@@ -49,9 +55,17 @@ router.post("/dashboard", isLoggedIn, (req, res, next) => {
 });
 
 
-router.post("/dashboard/:address/:token/:dashboardId", isLoggedIn, (req, res, next) => {
-res.send(req.params)
+router.post("/dashboard/:address/:tokenId/:dashboardId", isLoggedIn, (req, res, next) => {
 
+    NFTAssets
+        .find({token_id: req.params.tokenId, "asset_contract.address": req.params.address})
+        .then(nft => {
+            Dashboard
+                .findByIdAndUpdate(req.params.dashboardId, {$push: {nfts: nft}})
+                .then(() => res.redirect(`/dashboard/${req.params.dashboardId}`))
+                .catch(err => next(err))
+        })
+        .catch(err => next(err))
 });
 router.post("/dashboard/:dashboardId", isLoggedIn, (req, res, next) => {
     const {name, description, type, image_url} = req.body;

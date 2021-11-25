@@ -5,7 +5,8 @@
                 <div class="w-full">
                     <div class="my-2 p-1 bg-white flex border border-gray-200 rounded">
                         <div class="flex flex-auto flex-wrap"></div>
-                        <input onfocus="show('suggestion-list')" name="nft-name" placeholder="Search by name"
+                        <input id="search-sl" onkeyup="searchInSuggestionList()" onfocus="show('suggestion-list')" name="nft-name"
+                               placeholder="Search by name"
                                class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
                         <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
                             <button onclick="showHide('suggestion-list')"
@@ -23,10 +24,11 @@
                 <div id="suggestion-list"
                      class="absolute shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj hidden">
                     {{#each nfts}}
-                        <form action="/dashboard/{{asset_contract.address}}/{{token_id}}/{{../dashboardId}}" method="POST"
+                        <form action="/dashboard/{{asset_contract.address}}/{{token_id}}/{{../dashboardId}}"
+                              method="POST"
                               class="flex flex-col w-full">
                             <div class="flex flex-col w-full">
-                                <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100 hover:bg-red-300">
+                                <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100 hover:bg-grey-300 nft-target">
                                     <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                                         <div class="w-6 flex flex-col items-center">
                                             <div class="flex relative w-5 h-5 bg-orange-500 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
@@ -34,7 +36,7 @@
                                                      src={{image_url}}></div>
                                         </div>
                                         <div class="w-full items-center flex">
-                                            <div class="mx-2 -mt-1  ">{{name}}
+                                            <div class="mx-2 -mt-1">{{name}}
                                                 <div class="text-xs truncate w-full normal-case font-normal -mt-1 text-gray-500">
                                                     {{asset_contract.name}}
                                                 </div>
@@ -55,6 +57,15 @@
                     {{/each}}
                 </div>
             </div>
+            {{#each dashboard.nfts}}
+                <h1>{{name}}</h1>
+                <h1>{{description}}</h1>
+                <img class="h-20" src="{{image_url}}">
+            {{/each}}
         </div>
+
     </div>
 </div>
+
+
+
