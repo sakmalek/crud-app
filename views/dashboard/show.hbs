@@ -74,12 +74,18 @@
                     {{description}}
                 </p>
                 <div class="w-full flex justify-between items-center">
-                    <h1 class="font-bold text-gray-500 text-sm">{{ethPrice last_sale.total_price
-                                                                   last_sale.payment_token.decimals}}
-                        ETH  {{usdPrice last_sale.total_price
-                                         last_sale.payment_token.decimals
-                                         last_sale.payment_token.usd_price}}
-                        USD</h1>
+
+
+                    <h1 class="font-bold text-gray-600 text-sm">{{ethPrice last_sale.total_price
+                                                                           last_sale.payment_token.decimals}}
+                    </h1>
+                    <img class="h-4" src={{last_sale.payment_token.image_url}} alt={{name}} />
+                    <h1 class="font-bold text-gray-400 text-sm">
+                        {{usdPrice last_sale.total_price
+                                   last_sale.payment_token.decimals
+                                   last_sale.payment_token.usd_price}}
+                    </h1>
+                    <span class="font-bold text-gray-400 text-sm">USD</span>
                     <form action="/dashboard/{{_id}}/{{../dashboard._id}}/nft/delete" method="POST">
                         <button type="submit"
                                 class="mr-2 px-3 py-1 rounded-sm"

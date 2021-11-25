@@ -11,6 +11,7 @@ const saltRounds = 10;
 const User = require("../../models/User.model");
 
 const {isLoggedIn, isLoggedOut} = require("../../middleware/route-guard.js");
+const NFTAssets = require("../../models/NFTAssets.model");
 
 
 // .get() route ==> to display the signup form to users
@@ -97,7 +98,13 @@ router.post("/logout", isLoggedIn, (req, res) => {
 });
 
 router.get("/user", isLoggedIn, (req, res) => {
-    res.render("users/user");
+    NFTAssets.find()
+        .then(nfts => {
+            const index = Math.floor(Math.random() * nfts.length);
+            const nft = nfts[index];
+            res.render("users/user", {nft});
+        })
+        .catch(err => next(err))
 });
 
 module.exports = router;
