@@ -51,4 +51,13 @@ hbs.registerHelper('ifEqual', function (val1, val2, options) {
     }
     return options.inverse(this);
 });
+
+hbs.registerHelper('ethPrice', function (total_price, decimals) {
+    return total_price / Math.pow(10, decimals);
+
+});
+
+hbs.registerHelper('usdPrice', function (total_price, decimals, usd_price) {
+    return (total_price / Math.pow(10, decimals) * usd_price).toFixed(2);
+});
 module.exports = app;

@@ -1,6 +1,6 @@
 <div class="w-full flex flex-col items-center overflow-y-scroll">
 
-    <div class="w-full md:w-1/2 flex flex-col items-center h-64 py-14">
+    <div class="w-full  flex flex-col items-center h-64 py-14">
         <div class="w-full px-4">
             <div class="flex flex-col items-center relative">
                 <div class="fixed z-40 top-0 w-96">
@@ -78,7 +78,12 @@
                                     {{description}}
                                 </p>
                                 <div class="w-full flex justify-between items-center">
-                                    <h1 class="font-bold text-gray-500">PRICE</h1>
+                                    <h1 class="font-bold text-gray-500">{{ethPrice last_sale.total_price
+                                                                                   last_sale.payment_token.decimals}}
+                                        ETH | {{usdPrice last_sale.total_price
+                                                          last_sale.payment_token.decimals
+                                                          last_sale.payment_token.usd_price}}
+                                        USD</h1>
                                     <form action="/dashboard/{{_id}}/{{../dashboard._id}}/nft/delete" method="POST">
                                         <button type="submit"
                                                 class="bg-gray-300 mr-2 text-white px-3 py-1 rounded-sm shadow-md"
