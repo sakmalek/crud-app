@@ -15,7 +15,15 @@ const NFTAssets = require("../../models/NFTAssets.model");
 
 
 // .get() route ==> to display the signup form to users
-router.get("/signup", isLoggedOut, (req, res) => res.render("auth/signup"));
+router.get("/signup", isLoggedOut, (req, res) => {
+    NFTAssets.find()
+        .then(nfts => {
+            const index = Math.floor(Math.random() * nfts.length);
+            const nft = nfts[index];
+            res.render("auth/signup", {nft})
+        })
+
+});
 
 // .post() route ==> to process form data
 router.post("/signup", isLoggedOut, (req, res, next) => {
@@ -64,7 +72,15 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
         });
 });
 
-router.get("/login", isLoggedOut, (req, res) => res.render("auth/login"));
+router.get("/login", isLoggedOut, (req, res) => {
+    NFTAssets.find()
+        .then(nfts => {
+            const index = Math.floor(Math.random() * nfts.length);
+            const nft = nfts[index];
+            res.render("auth/login", {nft})
+        })
+    
+});
 
 router.post("/login", isLoggedOut, (req, res, next) => {
     const {email, password} = req.body;
